@@ -1,0 +1,16 @@
+<div class="image-detail">
+  <h1><%= @image.title %></h1>
+  
+  <% if @image.file.attached? %>
+    <%= image_tag @image.file, class: 'full-image' %>
+  <% end %>
+  
+  <div class="actions">
+    <%= link_to 'Voltar', images_path, class: 'button' %>
+    <%= link_to 'Excluir', image_path(@image), 
+                method: :delete,
+                data: { confirm: 'Tem certeza?' },
+                class: 'button delete' %>
+  </div>
+</div>
+
