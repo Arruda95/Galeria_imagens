@@ -25,6 +25,29 @@ class ImagesController < ApplicationController
     redirect_to images_path, notice: 'Imagem removida com sucesso!'
   end
   
+  def edit
+    @image = Image.find(params[:id])
+  end
+  
+  def update
+    @image = Image.find(params[:id])
+    if @image.update(image_params)
+      redirect_to @image, notice: 'Imagem atualizada com sucesso!'
+    else
+      render :edit
+    end
+  end
+  
+  def download
+    @image = Image.find(params[:id])
+    redirect_to url_for(@image.file)
+  end
+
+
+
+
+
+
   private
 
   def image_params

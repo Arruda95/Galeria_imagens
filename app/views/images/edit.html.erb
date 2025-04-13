@@ -1,0 +1,33 @@
+<h1>Editar Imagem</h1>
+
+<%= form_with(model: @image, local: true) do |form| %>
+  <% if @image.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@image.errors.count, "erro") %> encontrado:</h2>
+      <ul>
+        <% @image.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, "Título" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :file, "Nova Imagem (opcional)" %>
+    <%= form.file_field :file %>
+  </div>
+
+  <div class="current-image">
+    <p>Imagem Atual:</p>
+    <%= image_tag @image.file if @image.file.attached? %>
+  </div>
+
+  <%= form.submit "Atualizar" %>
+<% end %>
+
+<%= link_to 'Voltar', image_path(@image), class: 'button' %>

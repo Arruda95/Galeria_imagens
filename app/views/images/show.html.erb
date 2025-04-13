@@ -6,6 +6,7 @@
   <% end %>
   
   <div class="actions">
+    <%= link_to 'Editar', edit_image_path(@image), class: 'button edit' %>
     <%= link_to 'Voltar', images_path, class: 'button' %>
     <%= link_to 'Excluir', image_path(@image), 
                 method: :delete,
