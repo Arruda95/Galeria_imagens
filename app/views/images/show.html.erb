@@ -1,17 +1,22 @@
-<div class="image-detail">
-  <h1><%= @image.title %></h1>
-  
-  <% if @image.file.attached? %>
-    <%= image_tag @image.file, class: 'full-image' %>
-  <% end %>
-  
-  <div class="actions">
-    <%= link_to 'Editar', edit_image_path(@image), class: 'button edit' %>
-    <%= link_to 'Voltar', images_path, class: 'button' %>
-    <%= link_to 'Excluir', image_path(@image), 
-                method: :delete,
-                data: { confirm: 'Tem certeza?' },
-                class: 'button delete' %>
+<div class="container">
+  <div class="image-detail">
+    <h1><%= @image.title %></h1>
+    
+    <div class="image-container image-detail-container">
+      <%= image_tag @image.file if @image.file.attached? %>
+    </div>
+
+    <div class="image-info">
+      <p><%= @image.description %></p>
+    </div>
+
+    <div class="actions">
+      <%= link_to 'Editar', edit_image_path(@image), class: 'button edit' %>
+      <%= button_to 'Excluir', image_path(@image), 
+          method: :delete, 
+          data: { turbo_confirm: 'Tem certeza?' }, 
+          class: 'button delete' %>
+      <%= link_to 'Voltar', images_path, class: 'button back' %>
+    </div>
   </div>
 </div>
-

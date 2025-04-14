@@ -1,17 +1,5 @@
-<h1>Adicionar Nova Imagem</h1>
+<div class="container">
+  <h1>Nova Imagem</h1>
+  <%= render 'form', image: @image %>
+</div>
 
-<%= form_with(model: @image, local: true) do |form| %>
-  <div>
-    <%= form.label :title, "Título" %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :file, "Imagem" %>
-    <%= form.file_field :file %>
-  </div>
-
-  <%= form.submit "Enviar" %>
-<% end %>
-
-<%= link_to 'Voltar', images_path %>

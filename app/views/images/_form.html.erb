@@ -1,0 +1,37 @@
+<%= form_with(model: @image, local: true) do |form| %>
+  <% if @image.errors.any? %>
+    <div class="error-messages">
+      <h2><%= pluralize(@image.errors.count, "erro") %> impediram que esta imagem fosse salva:</h2>
+      <ul>
+        <% @image.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title, "Título" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, "Descrição" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field" data-controller="image">
+    <%= form.label :file, "Imagem" %>
+    <%= form.file_field :file,
+        data: {
+          image_target: "input",
+          action: "change->image#preview change->image#validateSize"
+        } %>
+    
+    <div class="preview" data-image-target="preview"></div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Salvar", class: "button" %>
+  </div>
+<% end %>

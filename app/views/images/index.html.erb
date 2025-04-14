@@ -1,23 +1,32 @@
-<h1>Galeria de Imagens</h1>
+<div class="container">
+  <h1>Galeria de Imagens</h1>
 
-<%= link_to 'Adicionar Nova Imagem', new_image_path, class: 'button' %>
+  <%# Botão para adicionar nova imagem %>
+  <div class="actions">
+    <%= link_to 'Nova Imagem', new_image_path, class: 'button' %>
+  </div>
 
-<div class="gallery">
-  <% @images.each do |image| %>
-    <div class="image-card">
-      <h3><%= image.title %></h3>
-      <% if image.file.attached? %>
+  <%# Grid de imagens %>
+  <div class="image-grid">
+    <% @images.each do |image| %>
+      <div class="image-card">
         <%= link_to image_path(image) do %>
-          <%= image_tag image.file %>
+          <div class="image-wrapper">
+            <%= image_tag image.file if image.file.attached? %>
+          </div>
+          <div class="image-info">
+            <h3><%= image.title %></h3>
+            <% if image.description.present? %>
+              <p class="description"><%= truncate(image.description, length: 50) %></p>
+            <% end %>
+          </div>
         <% end %>
-      <% end %>
-      <div class="card-actions">
-        <%= link_to 'Ver Detalhes', image_path(image), class: 'button small' %>
-        <%= link_to 'Excluir', image_path(image), 
-            method: :delete,
-            data: { confirm: 'Tem certeza?' },
-            class: 'button small delete' %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+
+  <%# Paginação %>
+  <div class="pagination">
+    <%= paginate @images %>
+  </div>
 </div>
